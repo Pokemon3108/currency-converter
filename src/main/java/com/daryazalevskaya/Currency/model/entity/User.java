@@ -1,21 +1,9 @@
 package com.daryazalevskaya.Currency.model.entity;
 
-import com.daryazalevskaya.Currency.model.Role;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -28,10 +16,12 @@ public class User {
     @Setter
     private Long id;
 
+    // @NotNull
     @Getter
     @Setter
     private String username;
 
+    // @NotNull
     @Getter
     @Setter
     private String password;

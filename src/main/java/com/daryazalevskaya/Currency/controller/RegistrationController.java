@@ -1,6 +1,6 @@
 package com.daryazalevskaya.Currency.controller;
 
-import com.daryazalevskaya.Currency.model.Role;
+import com.daryazalevskaya.Currency.model.entity.Role;
 import com.daryazalevskaya.Currency.model.entity.User;
 import com.daryazalevskaya.Currency.repos.UserRepos;
 import org.springframework.beans.factory.annotation.Autowired;
