@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="usr")
+@Table(name = "usr")
 public class User {
 
     @Id
@@ -30,8 +30,8 @@ public class User {
     @Setter
     private boolean isActive;
 
-    @ElementCollection(targetClass = Role.class, fetch=FetchType.LAZY)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name="user_id"))
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.LAZY)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter

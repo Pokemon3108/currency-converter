@@ -14,7 +14,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,19 +25,20 @@ public class CurrencyService {
 
     final private String url = "http://www.cbr.ru/scripts/XML_daily.asp";
 
-    private NodeList getCurrencyNodeList(String parentTagName) throws ParserConfigurationException, IOException, SAXException {
+    private Document getDocument() throws IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         URLConnection urlConnection = new URL(url).openConnection();
         Document document = builder.parse(urlConnection.getInputStream());
-        NodeList currencyList = document.getDocumentElement().getElementsByTagName(parentTagName);
-        return currencyList;
+        return document;
     }
 
 
-    public List<Currency> getCurrencyList(String parentTagName) throws IOException, SAXException, ParserConfigurationException {
+    public List<Currency> getCurrencyList(String parentTagName) throws IOException, SAXException, ParserConfigurationException, ParseException {
         List<Currency> currencyList = new ArrayList<>();
-        NodeList nodeCurrencyList = this.getCurrencyNodeList(parentTagName);
+
+        Document document = getDocument();
+        NodeList nodeCurrencyList = document.getDocumentElement().getElementsByTagName(parentTagName);
 
         for (int i = 0; i < nodeCurrencyList.getLength(); ++i) {
 
@@ -46,14 +50,21 @@ public class CurrencyService {
                     .charCode(currencyElement.getElementsByTagName("CharCode").item(0).getTextContent())
                     .nominal(Integer.parseInt(currencyElement.getElementsByTagName("Nominal").item(0).getTextContent()))
                     .name(currencyElement.getElementsByTagName("Name").item(0).getTextContent())
-                    .value(Double.parseDouble(currencyElement.getElementsByTagName("Value").item(0).getTextContent()))
+                    .value(Double.parseDouble(currencyElement.getElementsByTagName("Value").item(0).getTextContent().replaceAll(",", ".")))
                     .currencyId(currencyNode.getAttributes().getNamedItem("ID").getNodeValue())
+                    .courseDate(getDate())
                     .build());
 
         }
 
         return currencyList;
 
+    }
+
+    public Date getDate() throws ParserConfigurationException, SAXException, IOException, ParseException {
+        Document document = getDocument();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        return formatter.parse(document.getDocumentElement().getAttribute("Date"));
     }
 
 }

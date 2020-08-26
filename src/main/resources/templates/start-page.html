@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
     <title>Currency converter</title>
 </head>
 <body>
 <a href="/login">Authorization</a>
+
+<div th:if="${not #lists.isEmpty(currencyList)}">
+    <h1>Currency list</h1>
+    <h2 th:text="${todayDate}"></h2>
+    <table>
+        <tr>
+            <th>Currency Name</th>
+            <th>Currency Code</th>
+            <th>Nominal</th>
+            <th>Value</th>
+        </tr>
+        <tr th:each="currency : ${currencyList}">
+            <td th:text="${currency.name}"></td>
+            <td th:text="${currency.charCode}"></td>
+            <td th:text="${currency.nominal}"></td>
+            <td th:text="${currency.value}"></td>
+        </tr>
+    </table>
+</div>
 
 </body>
 </html>

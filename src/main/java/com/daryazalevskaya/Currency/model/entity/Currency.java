@@ -3,6 +3,7 @@ package com.daryazalevskaya.Currency.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Builder
@@ -39,6 +40,11 @@ public class Currency {
     @Getter
     @Setter
     private String currencyId;
+
+    @Getter
+    @Setter
+    @Temporal(TemporalType.DATE)
+    private Date courseDate;
 
 
 }
