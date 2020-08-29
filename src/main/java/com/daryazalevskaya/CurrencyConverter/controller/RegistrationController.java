@@ -1,8 +1,8 @@
-package com.daryazalevskaya.Currency.controller;
+package com.daryazalevskaya.CurrencyConverter.controller;
 
-import com.daryazalevskaya.Currency.model.entity.Role;
-import com.daryazalevskaya.Currency.model.entity.User;
-import com.daryazalevskaya.Currency.repos.UserRepos;
+import com.daryazalevskaya.CurrencyConverter.model.Role;
+import com.daryazalevskaya.CurrencyConverter.model.entity.User;
+import com.daryazalevskaya.CurrencyConverter.repos.UserRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

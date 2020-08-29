@@ -1,4 +1,4 @@
-package com.daryazalevskaya.Currency.model.entity;
+package com.daryazalevskaya.CurrencyConverter.model.entity;
 
 import lombok.*;
 
@@ -45,6 +45,5 @@ public class Currency {
     @Setter
     @Temporal(TemporalType.DATE)
     private Date courseDate;
-
 
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <title>Conversion</title>
+</head>
+<body>
+<!--<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
+<!--<form th:action="@{/logout}" method="post">-->
+<!--    <input type="submit" value="Sign Out"/>-->
+<!--</form>-->
+<h1>Converter</h1>
+
+<form>
+    <div class="fromCurrency">
+        <select>
+            <option value="">Select original currency</option>
+            <option th:each="cur_name: ${currencies_name}"
+                    th:value="${cur_name.charCode}"
+                    th:text="${cur_name.nominal} + ' ' +  ${cur_name.name} + ' (' + ${cur_name.charCode} + ')'">
+            </option>
+        </select>
+
+        <input type="number" name="original_amount">
+    </div>
+
+    <div class="toCurrency">
+        <select>
+            <option value="">Select received currency</option>
+            <option th:each="cur_name: ${currencies_name}"
+                    th:value="${cur_name.charCode}"
+                    th:text="${cur_name.name} + ' (' + ${cur_name.charCode} + ')'">
+            </option>
+        </select>
+
+        <input type="number" name="received_amount" disabled>
+    </div>
+
+    <div><input type="submit" value="Convert"/></div>
+</form>
+</body>
+</html>

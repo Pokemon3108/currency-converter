@@ -1,4 +1,4 @@
-package com.daryazalevskaya.Currency.config;
+package com.daryazalevskaya.CurrencyConverter.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/hello", true)
+                .defaultSuccessUrl("/convert", true)
                 .permitAll();
     }
 
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("select username, password, is_active from usr where username=?") //find a user by username
                 .authoritiesByUsernameQuery("select username, roles " +
-                        "from usr join user_role on usr.id=user_role.user_id where username=?"); //find user's authority by username
+                        "from usr join user_role on usr.id=user_role.user_id_role where username=?"); //find user's authority by username
     }
 
     @Bean

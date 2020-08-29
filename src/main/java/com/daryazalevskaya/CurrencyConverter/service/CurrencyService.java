@@ -1,6 +1,6 @@
-package com.daryazalevskaya.Currency.service;
+package com.daryazalevskaya.CurrencyConverter.service;
 
-import com.daryazalevskaya.Currency.model.entity.Currency;
+import com.daryazalevskaya.CurrencyConverter.model.entity.Currency;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -24,6 +24,7 @@ import java.util.List;
 public class CurrencyService {
 
     final private String url = "http://www.cbr.ru/scripts/XML_daily.asp";
+
 
     private Document getDocument() throws IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -66,5 +67,6 @@ public class CurrencyService {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         return formatter.parse(document.getDocumentElement().getAttribute("Date"));
     }
+
 
 }

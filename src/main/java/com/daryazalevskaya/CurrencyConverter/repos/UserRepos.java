@@ -1,6 +1,6 @@
-package com.daryazalevskaya.Currency.repos;
+package com.daryazalevskaya.CurrencyConverter.repos;
 
-import com.daryazalevskaya.Currency.model.entity.User;
+import com.daryazalevskaya.CurrencyConverter.model.entity.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepos extends CrudRepository<User, Long> {

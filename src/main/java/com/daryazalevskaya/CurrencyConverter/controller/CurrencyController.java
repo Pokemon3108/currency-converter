@@ -1,8 +1,8 @@
-package com.daryazalevskaya.Currency.controller;
+package com.daryazalevskaya.CurrencyConverter.controller;
 
-import com.daryazalevskaya.Currency.model.entity.Currency;
-import com.daryazalevskaya.Currency.repos.CurrencyRepos;
-import com.daryazalevskaya.Currency.service.CurrencyService;
+import com.daryazalevskaya.CurrencyConverter.model.entity.Currency;
+import com.daryazalevskaya.CurrencyConverter.repos.CurrencyRepos;
+import com.daryazalevskaya.CurrencyConverter.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,22 +27,24 @@ public class CurrencyController {
     private CurrencyRepos currencyRepos;
 
     @GetMapping("/")
-    public String showCurrencyTable(Model model) throws ParserConfigurationException, SAXException, IOException, ParseException {
+    public String showCurrencyTable(Model model) {
         List<Currency> currencyList = new ArrayList<>();
 
-        Date todayDate = new Date();
-        todayDate = currencyService.getDate();
-        model.addAttribute("todayDate", new SimpleDateFormat("dd.MM.yyyy").format(todayDate));
+        try {
+            Date todayDate = new Date();
+            todayDate = currencyService.getDate();
 
-        if (currencyRepos.existsByCourseDate(todayDate)) {
-            currencyList = currencyRepos.getAllByCourseDate(todayDate);
-        } else {
-            try {
+            model.addAttribute("todayDate", new SimpleDateFormat("dd.MM.yyyy").format(todayDate));
+
+            if (currencyRepos.existsByCourseDate(todayDate)) {
+                currencyList = currencyRepos.getAllByCourseDate(todayDate);
+            } else {
                 currencyList = currencyService.getCurrencyList("Valute");
                 currencyRepos.saveAll(currencyList);
-            } catch (ParserConfigurationException | SAXException | IOException | ParseException ex) {
-                return "error-page";
             }
+
+        } catch (ParserConfigurationException | SAXException | IOException | ParseException ex) {
+            return "error-page";
         }
 
         model.addAttribute("currencyList", currencyList);
