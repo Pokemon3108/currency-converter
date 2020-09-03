@@ -8,11 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.text.ParseException;
 
 @Controller
 public class ConversionController {
@@ -28,13 +23,9 @@ public class ConversionController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User loggedUser = userRepos.findByUsername(username);
 
-        try {
-            model.addAttribute("currencies_name", currencyService.getCurrencyList("Valute"));
-        } catch (IOException | SAXException | ParserConfigurationException | ParseException e) {
-            return "error-page";
-        }
-
+        model.addAttribute("currencies_name", currencyService.getCurrencyList());
         model.addAttribute("save_conversion", "Your conversion has been succesfully saved!");
         return "convert";
     }
+
 }

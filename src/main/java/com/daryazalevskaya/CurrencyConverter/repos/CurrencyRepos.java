@@ -11,6 +11,8 @@ public interface CurrencyRepos extends CrudRepository<Currency, Long> {
 
     List<Currency> getAllByCourseDate(Date courseDate);
 
+    void deleteAllByCourseDate(Date courseDate);
+
 //    @Query(value="select name from currency", nativeQuery = true)
 //    Set<String> getCurrencyName();
 }

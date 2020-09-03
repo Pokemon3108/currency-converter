@@ -13,7 +13,7 @@
 
 <form>
     <div class="fromCurrency">
-        <select>
+        <select id="firstCurName" onchange="createResult()">
             <option value="">Select original currency</option>
             <option th:each="cur_name: ${currencies_name}"
                     th:value="${cur_name.charCode}"
@@ -21,11 +21,11 @@
             </option>
         </select>
 
-        <input type="number" name="original_amount">
+        <input type="number" name="original_amount" oninput="createResult()">
     </div>
 
     <div class="toCurrency">
-        <select>
+        <select id="secondCurName" onchange="createResult()">
             <option value="">Select received currency</option>
             <option th:each="cur_name: ${currencies_name}"
                     th:value="${cur_name.charCode}"
@@ -38,5 +38,8 @@
 
     <div><input type="submit" value="Convert"/></div>
 </form>
+
+<script src="scripts/convert.js"></script>
+
 </body>
 </html>

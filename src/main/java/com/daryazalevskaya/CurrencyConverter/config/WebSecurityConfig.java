@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/convert", true)
+                .defaultSuccessUrl("/converter", true)
                 .permitAll();
     }
 

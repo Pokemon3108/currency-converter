@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.xml.sax.SAXException;
 
+import javax.transaction.Transactional;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Transactional
 @Controller
 public class CurrencyController {
 
@@ -31,24 +33,38 @@ public class CurrencyController {
         List<Currency> currencyList = new ArrayList<>();
 
         try {
-            Date todayDate = new Date();
-            todayDate = currencyService.getDate();
-
+            Date todayDate = currencyService.getDate();
             model.addAttribute("todayDate", new SimpleDateFormat("dd.MM.yyyy").format(todayDate));
 
             if (currencyRepos.existsByCourseDate(todayDate)) {
-                currencyList = currencyRepos.getAllByCourseDate(todayDate);
-            } else {
-                currencyList = currencyService.getCurrencyList("Valute");
-                currencyRepos.saveAll(currencyList);
+                currencyRepos.deleteAllByCourseDate(todayDate);
             }
+
+            currencyService.setCurrencyList("Valute");
+            currencyList = currencyService.getCurrencyList();
+            currencyRepos.saveAll(currencyList);
+
 
         } catch (ParserConfigurationException | SAXException | IOException | ParseException ex) {
             return "error-page";
         }
 
         model.addAttribute("currencyList", currencyList);
-
         return "start-page";
+    }
+
+    @GetMapping("/login")
+    public String saveCurrencyToDb() {
+        List<Currency> currencies = currencyService.getCurrencyList();
+        if (currencies.size() == 0) {
+            try {
+                currencyService.setCurrencyList("Valute");
+                currencyRepos.saveAll(currencyService.getCurrencyList());
+            } catch (Exception e) {
+                return "error-page";
+            }
+        }
+
+        return "login";
     }
 }

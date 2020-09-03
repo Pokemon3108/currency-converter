@@ -1,6 +1,8 @@
 package com.daryazalevskaya.CurrencyConverter.service;
 
 import com.daryazalevskaya.CurrencyConverter.model.entity.Currency;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -25,19 +27,19 @@ public class CurrencyService {
 
     final private String url = "http://www.cbr.ru/scripts/XML_daily.asp";
 
+    @Getter
+    @Setter
+    private List<Currency> currencyList = new ArrayList<>();
 
     private Document getDocument() throws IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         URLConnection urlConnection = new URL(url).openConnection();
-        Document document = builder.parse(urlConnection.getInputStream());
-        return document;
+        return builder.parse(urlConnection.getInputStream());
     }
 
 
-    public List<Currency> getCurrencyList(String parentTagName) throws IOException, SAXException, ParserConfigurationException, ParseException {
-        List<Currency> currencyList = new ArrayList<>();
-
+    public void setCurrencyList(String parentTagName) throws IOException, SAXException, ParserConfigurationException, ParseException {
         Document document = getDocument();
         NodeList nodeCurrencyList = document.getDocumentElement().getElementsByTagName(parentTagName);
 
@@ -46,7 +48,7 @@ public class CurrencyService {
             Node currencyNode = nodeCurrencyList.item(i);
             Element currencyElement = (Element) currencyNode;
 
-            currencyList.add(Currency.builder()
+            this.currencyList.add(Currency.builder()
                     .numCode(Integer.parseInt(currencyElement.getElementsByTagName("NumCode").item(0).getTextContent()))
                     .charCode(currencyElement.getElementsByTagName("CharCode").item(0).getTextContent())
                     .nominal(Integer.parseInt(currencyElement.getElementsByTagName("Nominal").item(0).getTextContent()))
@@ -57,9 +59,6 @@ public class CurrencyService {
                     .build());
 
         }
-
-        return currencyList;
-
     }
 
     public Date getDate() throws ParserConfigurationException, SAXException, IOException, ParseException {
