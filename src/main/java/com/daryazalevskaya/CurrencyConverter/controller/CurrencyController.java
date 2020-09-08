@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import javax.transaction.Transactional;
@@ -14,7 +15,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,17 +30,18 @@ public class CurrencyController {
 
     @GetMapping("/")
     public String showCurrencyTable(Model model) {
-        List<Currency> currencyList = new ArrayList<>();
+        List<Currency> currencyList;
 
         try {
-            Date todayDate = currencyService.getDate();
+            Document document = currencyService.getDocument();
+            Date todayDate = currencyService.getDate(document);
             model.addAttribute("todayDate", new SimpleDateFormat("dd.MM.yyyy").format(todayDate));
 
             if (currencyRepos.existsByCourseDate(todayDate)) {
                 currencyRepos.deleteAllByCourseDate(todayDate);
             }
 
-            currencyService.setCurrencyList("Valute");
+            currencyService.setCurrencyList(document, "Valute");
             currencyList = currencyService.getCurrencyList();
             currencyRepos.saveAll(currencyList);
 
@@ -58,7 +59,8 @@ public class CurrencyController {
         List<Currency> currencies = currencyService.getCurrencyList();
         if (currencies.size() == 0) {
             try {
-                currencyService.setCurrencyList("Valute");
+                Document document = currencyService.getDocument();
+                currencyService.setCurrencyList(document, "Valute");
                 currencyRepos.saveAll(currencyService.getCurrencyList());
             } catch (Exception e) {
                 return "error-page";

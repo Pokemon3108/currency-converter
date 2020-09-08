@@ -1,12 +1,14 @@
 package com.daryazalevskaya.CurrencyConverter.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
 import java.util.Date;
 
 @Embeddable
+@NoArgsConstructor
 public class Conversion {
 
     @Getter
@@ -15,7 +17,7 @@ public class Conversion {
 
     @Getter
     @Setter
-    private int originalMoneyAmount;
+    private double originalMoneyAmount;
 
     @Getter
     @Setter
@@ -23,7 +25,7 @@ public class Conversion {
 
     @Getter
     @Setter
-    private int receivedMoneyAmount;
+    private double receivedMoneyAmount;
 
     @Getter
     @Setter

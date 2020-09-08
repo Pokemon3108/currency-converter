@@ -5,15 +5,12 @@
     <title>Conversion</title>
 </head>
 <body>
-<!--<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
-<!--<form th:action="@{/logout}" method="post">-->
-<!--    <input type="submit" value="Sign Out"/>-->
-<!--</form>-->
+
 <h1>Converter</h1>
 
-<form>
+<form th:action="@{/saveConversion}" th:object="${conversion}" method="post">
     <div class="fromCurrency">
-        <select id="firstCurName" onchange="createResult()">
+        <select th:field="*{originalCurrency}" id="firstCurName" onchange="createResult()">
             <option value="">Select original currency</option>
             <option th:each="cur_name: ${currencies_name}"
                     th:value="${cur_name.charCode}"
@@ -21,11 +18,12 @@
             </option>
         </select>
 
-        <input type="number" name="original_amount" oninput="createResult()">
+        <input type="number" name="originalMoneyAmount" step="any" th:field="*{originalMoneyAmount}"
+               oninput="createResult()">
     </div>
 
     <div class="toCurrency">
-        <select id="secondCurName" onchange="createResult()">
+        <select id="secondCurName" th:field="*{receivedCurrency}" onchange="createResult()">
             <option value="">Select received currency</option>
             <option th:each="cur_name: ${currencies_name}"
                     th:value="${cur_name.charCode}"
@@ -33,7 +31,7 @@
             </option>
         </select>
 
-        <input type="number" name="received_amount" disabled>
+        <input type="number" name="receivedMoneyAmount" th:field="*{receivedMoneyAmount}" readonly>
     </div>
 
     <div><input type="submit" value="Convert"/></div>

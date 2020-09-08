@@ -31,7 +31,7 @@ public class CurrencyService {
     @Setter
     private List<Currency> currencyList = new ArrayList<>();
 
-    private Document getDocument() throws IOException, ParserConfigurationException, SAXException {
+    public Document getDocument() throws IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         URLConnection urlConnection = new URL(url).openConnection();
@@ -39,8 +39,7 @@ public class CurrencyService {
     }
 
 
-    public void setCurrencyList(String parentTagName) throws IOException, SAXException, ParserConfigurationException, ParseException {
-        Document document = getDocument();
+    public void setCurrencyList(Document document, String parentTagName) throws ParseException {
         NodeList nodeCurrencyList = document.getDocumentElement().getElementsByTagName(parentTagName);
 
         for (int i = 0; i < nodeCurrencyList.getLength(); ++i) {
@@ -55,14 +54,13 @@ public class CurrencyService {
                     .name(currencyElement.getElementsByTagName("Name").item(0).getTextContent())
                     .value(Double.parseDouble(currencyElement.getElementsByTagName("Value").item(0).getTextContent().replaceAll(",", ".")))
                     .currencyId(currencyNode.getAttributes().getNamedItem("ID").getNodeValue())
-                    .courseDate(getDate())
+                    .courseDate(getDate(document))
                     .build());
 
         }
     }
 
-    public Date getDate() throws ParserConfigurationException, SAXException, IOException, ParseException {
-        Document document = getDocument();
+    public Date getDate(Document document) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         return formatter.parse(document.getDocumentElement().getAttribute("Date"));
     }
