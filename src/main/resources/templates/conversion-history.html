@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversion history</title>
+</head>
+<body>
+
+<div th:if="${not #lists.isEmpty(conversionHistory)}">
+    <h1>History</h1>
+    <table>
+        <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Original amount</th>
+            <th>Received amount</th>
+            <th>Date</th>
+        </tr>
+        <tr th:each="conversion : ${conversionHistory}">
+            <td th:text="${conversion.originalCurrency}"></td>
+            <td th:text="${conversion.receivedCurrency}"></td>
+            <td th:text="${conversion.originalMoneyAmount}"></td>
+            <td th:text="${conversion.receivedMoneyAmount}"></td>
+            <td th:text="${#dates.format(conversion.date, 'dd.MM.yyyy')}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

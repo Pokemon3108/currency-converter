@@ -1,8 +1,8 @@
-package com.daryazalevskaya.CurrencyConverter.controller;
+package com.daryazalevskaya.currencyconverter.controller;
 
-import com.daryazalevskaya.CurrencyConverter.model.entity.Currency;
-import com.daryazalevskaya.CurrencyConverter.repos.CurrencyRepos;
-import com.daryazalevskaya.CurrencyConverter.service.CurrencyService;
+import com.daryazalevskaya.currencyconverter.model.entity.Currency;
+import com.daryazalevskaya.currencyconverter.repos.CurrencyRepos;
+import com.daryazalevskaya.currencyconverter.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +57,7 @@ public class CurrencyController {
     @GetMapping("/login")
     public String saveCurrencyToDb() {
         List<Currency> currencies = currencyService.getCurrencyList();
-        if (currencies.size() == 0) {
+        if (currencies.isEmpty()) {
             try {
                 Document document = currencyService.getDocument();
                 currencyService.setCurrencyList(document, "Valute");

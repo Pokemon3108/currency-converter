@@ -1,4 +1,4 @@
-package com.daryazalevskaya.CurrencyConverter.model.entity;
+package com.daryazalevskaya.currencyconverter.model.entity;
 
 import lombok.*;
 

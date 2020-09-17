@@ -1,4 +1,4 @@
-package com.daryazalevskaya.CurrencyConverter.config;
+package com.daryazalevskaya.currencyconverter.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -10,7 +10,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("start-page");
-        registry.addViewController("/converter").setViewName("convert");
+        registry.addViewController("/homePage").setViewName("home-page");
         registry.addViewController("/login").setViewName("login");
     }
 

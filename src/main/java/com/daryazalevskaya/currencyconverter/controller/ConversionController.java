@@ -1,9 +1,9 @@
-package com.daryazalevskaya.CurrencyConverter.controller;
+package com.daryazalevskaya.currencyconverter.controller;
 
-import com.daryazalevskaya.CurrencyConverter.model.Conversion;
-import com.daryazalevskaya.CurrencyConverter.model.entity.User;
-import com.daryazalevskaya.CurrencyConverter.repos.UserRepos;
-import com.daryazalevskaya.CurrencyConverter.service.CurrencyService;
+import com.daryazalevskaya.currencyconverter.model.Conversion;
+import com.daryazalevskaya.currencyconverter.model.entity.User;
+import com.daryazalevskaya.currencyconverter.repos.UserRepos;
+import com.daryazalevskaya.currencyconverter.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -52,10 +52,9 @@ public class ConversionController {
             return new ModelAndView("error");
         }
 
-
-        // model.addAttribute("save_conversion", "Your conversion has been successfully saved!");
         return new ModelAndView("redirect:/converter", "success-save", true);
-        // return "redirect:/converter";
-        // return "convert";
+
     }
+
+
 }

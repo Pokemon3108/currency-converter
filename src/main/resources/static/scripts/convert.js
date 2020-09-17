@@ -38,7 +38,7 @@ function createResult() {
     let secondCurName = document.getElementById("secondCurName").value;
     if (firstCurName === "" || secondCurName === "") return;
 
-    let result = map.get(firstCurName) / map.get(secondCurName) * amount;
+    let result = (map.get(firstCurName) / map.get(secondCurName) * amount).toFixed(2);
     let resultField = document.getElementsByName("receivedMoneyAmount")[0];
     resultField.value = result;
 }

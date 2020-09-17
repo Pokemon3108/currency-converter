@@ -1,4 +1,4 @@
-package com.daryazalevskaya.CurrencyConverter.config;
+package com.daryazalevskaya.currencyconverter.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/converter", true)
+                .defaultSuccessUrl("/homePage", true)
                 .permitAll();
     }
 

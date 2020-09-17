@@ -1,7 +1,7 @@
-package com.daryazalevskaya.CurrencyConverter.controller;
+package com.daryazalevskaya.currencyconverter.controller;
 
-import com.daryazalevskaya.CurrencyConverter.model.entity.Currency;
-import com.daryazalevskaya.CurrencyConverter.service.CurrencyService;
+import com.daryazalevskaya.currencyconverter.model.entity.Currency;
+import com.daryazalevskaya.currencyconverter.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

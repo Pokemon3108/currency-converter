@@ -1,7 +1,7 @@
-package com.daryazalevskaya.CurrencyConverter.model.entity;
+package com.daryazalevskaya.currencyconverter.model.entity;
 
-import com.daryazalevskaya.CurrencyConverter.model.Conversion;
-import com.daryazalevskaya.CurrencyConverter.model.Role;
+import com.daryazalevskaya.currencyconverter.model.Conversion;
+import com.daryazalevskaya.currencyconverter.model.Role;
 import lombok.Getter;
 import lombok.Setter;
 

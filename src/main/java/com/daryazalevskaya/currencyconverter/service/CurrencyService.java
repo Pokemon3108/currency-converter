@@ -1,6 +1,6 @@
-package com.daryazalevskaya.CurrencyConverter.service;
+package com.daryazalevskaya.currencyconverter.service;
 
-import com.daryazalevskaya.CurrencyConverter.model.entity.Currency;
+import com.daryazalevskaya.currencyconverter.model.entity.Currency;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
@@ -52,7 +52,7 @@ public class CurrencyService {
                     .charCode(currencyElement.getElementsByTagName("CharCode").item(0).getTextContent())
                     .nominal(Integer.parseInt(currencyElement.getElementsByTagName("Nominal").item(0).getTextContent()))
                     .name(currencyElement.getElementsByTagName("Name").item(0).getTextContent())
-                    .value(Double.parseDouble(currencyElement.getElementsByTagName("Value").item(0).getTextContent().replaceAll(",", ".")))
+                    .value(Double.parseDouble(currencyElement.getElementsByTagName("Value").item(0).getTextContent().replace(",", ".")))
                     .currencyId(currencyNode.getAttributes().getNamedItem("ID").getNodeValue())
                     .courseDate(getDate(document))
                     .build());

@@ -1,6 +1,6 @@
-package com.daryazalevskaya.CurrencyConverter.repos;
+package com.daryazalevskaya.currencyconverter.repos;
 
-import com.daryazalevskaya.CurrencyConverter.model.entity.Currency;
+import com.daryazalevskaya.currencyconverter.model.entity.Currency;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Date;
@@ -13,6 +13,4 @@ public interface CurrencyRepos extends CrudRepository<Currency, Long> {
 
     void deleteAllByCourseDate(Date courseDate);
 
-//    @Query(value="select name from currency", nativeQuery = true)
-//    Set<String> getCurrencyName();
 }

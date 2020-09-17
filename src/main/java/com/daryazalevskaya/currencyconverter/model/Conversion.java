@@ -1,4 +1,4 @@
-package com.daryazalevskaya.CurrencyConverter.model;
+package com.daryazalevskaya.currencyconverter.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
